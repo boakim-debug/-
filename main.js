@@ -126,10 +126,34 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
 });
+// Custom Cursor Logic
+const cursor = document.getElementById('custom-cursor');
+let mouseX = 0, mouseY = 0;
 
-// Smooth Scroll
-document.querySelectorAll('nav a').forEach(anchor => {
+window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    // Smooth movement using requestAnimationFrame or simple direct update
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+});
+
+const interactiveElements = document.querySelectorAll('a, button, input, textarea, project-card, .logo');
+
+interactiveElements.forEach((el) => {
+    el.addEventListener('mouseenter', () => {
+        cursor.classList.add('hover');
+    });
+    el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('hover');
+    });
+});
+
+// Smooth Scroll (Updated to include new interactive elements)
+document.querySelectorAll('nav a, .logo').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
+...
         const targetId = this.getAttribute('href');
         if (targetId.startsWith('#')) {
             e.preventDefault();

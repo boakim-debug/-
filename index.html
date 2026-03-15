@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOA | Minimal Portfolio</title>
+    <title>BOA KIM | Urban Designer Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="custom-cursor"></div>
+
     <header>
-        <a href="#" class="logo">BOA.</a>
+        <a href="#" class="logo">URBAN.BOA</a>
         <nav>
-            <a href="#projects">WORKS.</a>
+            <a href="#projects">PROJECTS.</a>
             <a href="#about">ABOUT.</a>
             <a href="#contact">CONTACT.</a>
             <button id="theme-toggle">DARK</button>
@@ -22,46 +24,47 @@
 
     <main>
         <section id="hero" class="hero visible">
-            <h1>안녕하세요, <br><span class="highlight">김보아</span>입니다.</h1>
-            <p>미니멀한 디자인과 깔끔한 코드를 지향하는 대학생 개발자입니다. 새로운 기술을 배우고 가치 있는 경험을 만드는 것을 즐깁니다.</p>
+            <h1>도시의 숨결을 <br>디자인하는 <span class="highlight">김보아</span>입니다.</h1>
+            <p>도시공학을 전공하며 지속 가능한 도시 환경과 보행자 중심의 공간 설계를 연구합니다. 데이터와 미학이 공존하는 미래 도시를 꿈꿉니다.</p>
         </section>
 
         <section id="projects">
-            <h2 class="section-title">WORKS.</h2>
+            <h2 class="section-title">URBAN DESIGN PROJECTS.</h2>
             <div class="project-grid">
-                <project-card name="Stone Mind" description="미니멀리즘 디자인 철학을 담은 첫 번째 프로젝트입니다."></project-card>
-                <project-card name="Violet Orbit" description="현대적인 UI 디자인과 부드러운 인터랙션을 탐구한 결과물입니다."></project-card>
-                <project-card name="Mint Flow" description="사용자 경험을 최우선으로 생각한 포트폴리오 템플릿입니다."></project-card>
+                <project-card name="Green Corridor" description="도심 내 방치된 선형 공간을 활용한 미세먼지 저감 녹지 축 설계 프로젝트입니다."></project-card>
+                <project-card name="Smart Mobility Hub" description="퍼스널 모빌리티와 대중교통의 유기적 결합을 통한 복합 환승 거점 공간 계획입니다."></project-card>
+                <project-card name="Pedestrian First" description="기존 차도 중심의 가로 환경을 보행자 중심의 문화 거리로 재구성한 도시 재생 프로젝트입니다."></project-card>
             </div>
         </section>
 
         <section id="about">
-            <h2 class="section-title">ABOUT.</h2>
+            <h2 class="section-title">ABOUT ME.</h2>
             <div class="about-content">
-                <p>저는 OO대학교에 재학 중이며, 사용자에게 시각적으로 즐겁고 사용하기 편한 웹 환경을 제공하는 것을 목표로 합니다. <br><br>
-                단순함(Simplicity)이 최고의 정교함이라는 믿음 아래, 복잡한 문제를 명료한 디자인과 효율적인 코드로 해결하려고 노력합니다.</p>
+                <p>저는 OO대학교 도시공학과에 재학 중인 예비 도시설계가입니다. <br><br>
+                도시의 물리적 구조뿐만 아니라 그 속에 살아가는 사람들의 행태와 심리를 분석하여, 모두에게 포용적이고 즐거움을 주는 도시 공간을 만드는 것에 열정을 가지고 있습니다. <br><br>
+                CAD, GIS 및 3D 모델링 도구를 활용하여 구상한 아이디어를 실현 가능한 도면과 시각 자료로 구체화하는 작업에 능숙합니다.</p>
             </div>
         </section>
 
         <section id="contact">
-            <h2 class="section-title">CONTACT.</h2>
+            <h2 class="section-title">COLLABORATION.</h2>
             <div class="contact-container">
                 <div class="contact-text">
-                    <h3>같이 가치 있는 일을 <br><span class="highlight">만들어볼까요?</span></h3>
-                    <p style="margin-top: 1rem; opacity: 0.7;">협업 제안이나 궁금한 점이 있다면 언제든 메시지를 남겨주세요.</p>
+                    <h3>미래의 도시를 <br><span class="highlight">함께 그려볼까요?</span></h3>
+                    <p style="margin-top: 1rem; opacity: 0.7;">도시 설계 프로젝트 협업이나 관련 문의는 언제든 환영합니다.</p>
                 </div>
                 <form action="https://formspree.io/f/mqeydbkg" method="POST">
                     <div class="form-group">
                         <label for="name">NAME.</label>
-                        <input type="text" id="name" name="name" required placeholder="Your Name">
+                        <input type="text" id="name" name="name" required placeholder="성함 또는 기업명">
                     </div>
                     <div class="form-group">
                         <label for="email">EMAIL.</label>
-                        <input type="email" id="email" name="_replyto" required placeholder="example@email.com">
+                        <input type="email" id="email" name="_replyto" required placeholder="contact@city.com">
                     </div>
                     <div class="form-group">
                         <label for="message">MESSAGE.</label>
-                        <textarea id="message" name="message" rows="5" required placeholder="What's on your mind?"></textarea>
+                        <textarea id="message" name="message" rows="5" required placeholder="함께 논의하고 싶은 도시 설계 프로젝트에 대해 알려주세요."></textarea>
                     </div>
                     <button type="submit" class="submit-btn">SEND MESSAGE</button>
                 </form>
@@ -69,13 +72,13 @@
         </section>
 
         <section id="comments">
-            <h2 class="section-title">COMMENTS.</h2>
+            <h2 class="section-title">PUBLIC OPINION.</h2>
             <div id="utterances-container"></div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 BOA KIM. Built with passion and mint tea.</p>
+        <p>&copy; 2026 BOA KIM | URBAN ENGINEERING STUDENT. All rights reserved.</p>
     </footer>
 
     <script src="main.js"></script>
