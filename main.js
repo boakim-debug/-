@@ -44,14 +44,49 @@ if (savedTheme === 'dark') {
     themeToggle.textContent = '라이트 모드';
 }
 
+// Utterances Comments Logic
+const loadUtterances = () => {
+    const container = document.getElementById('utterances-container');
+    if (!container) return;
+
+    const script = document.createElement('script');
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'boakim-debug/-'); // Replace with your repository
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('label', '💬');
+    script.setAttribute('theme', isDarkMode ? 'github-dark' : 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+
+    container.innerHTML = '';
+    container.appendChild(script);
+};
+
+// Initial load
+loadUtterances();
+
 themeToggle.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
     
-    if (body.classList.contains('dark-mode')) {
+    const isDark = body.classList.contains('dark-mode');
+    if (isDark) {
         localStorage.setItem('theme', 'dark');
         themeToggle.textContent = '라이트 모드';
     } else {
         localStorage.setItem('theme', 'light');
         themeToggle.textContent = '다크 모드';
+    }
+
+    // Update Utterances theme
+    const utterances = document.querySelector('.utterances-frame');
+    if (utterances) {
+        const theme = isDark ? 'github-dark' : 'github-light';
+        const message = {
+            type: 'set-theme',
+            theme: theme
+        };
+        utterances.contentWindow.postMessage(message, 'https://utteranc.es');
     }
 });
