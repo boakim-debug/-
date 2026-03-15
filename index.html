@@ -1,16 +1,27 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOA KIM | Urban Designer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="custom-cursor"></div>
+
+    <div id="project-modal">
+        <button class="modal-close">CLOSE.</button>
+        <div class="modal-content">
+            <h2 id="modal-title">Project Name</h2>
+            <p id="modal-description" class="description">Project detailed description goes here.</p>
+            <div id="modal-comments">
+                <span class="section-title">COMMENTS.</span>
+                <div id="project-utterances"></div>
+            </div>
+        </div>
+    </div>
 
     <header>
         <a href="#" class="logo">URBAN.BOA</a>
@@ -25,57 +36,37 @@
     <main>
         <section id="hero" class="hero visible">
             <h1>Designing the <br>pulse of the city. <br>I am <span class="highlight">BOA KIM</span>.</h1>
-            <p>I envision a sustainable and pedestrian-oriented future through thoughtful urban design and planning.</p>
+            <p>Urban engineering student focusing on human-centered spatial design.</p>
         </section>
 
         <section id="projects">
-            <span class="section-title">WORKS.</span>
+            <span class="section-title">WORKS. (Click for details)</span>
             <div class="project-grid">
-                <project-card name="Green Corridor" description="A landscape infrastructure project revitalizing neglected urban linear spaces to reduce fine dust."></project-card>
-                <project-card name="Smart Mobility Hub" description="An integrated transit center planning project connecting personal mobility with public transportation."></project-card>
-                <project-card name="Pedestrian First" description="An urban regeneration project transforming vehicle-oriented streets into vibrant pedestrian-centric cultural spaces."></project-card>
+                <project-card id="p1" name="Green Corridor" description="Landscape infrastructure project revitalizing neglected urban spaces."></project-card>
+                <project-card id="p2" name="Smart Mobility Hub" description="Integrated transit center connecting personal mobility and public transport."></project-card>
+                <project-card id="p3" name="Pedestrian First" description="Urban regeneration transforming vehicle-oriented streets to pedestrian zones."></project-card>
             </div>
         </section>
 
         <section id="about">
             <span class="section-title">ABOUT.</span>
             <div class="about-content">
-                <p style="font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 700; line-height: 1.2; margin-bottom: 3rem;">
-                    I believe that simplicity is the ultimate sophistication in solving complex urban challenges.
-                </p>
-                <p style="font-size: 1.1rem; opacity: 0.7; max-width: 600px;">
-                    Currently an Urban Engineering student, I focus on creating human-centered environments by bridging technical analysis—utilizing CAD and GIS—with creative spatial vision.
-                </p>
+                <p style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">Simplicity is the ultimate sophistication in urban challenges.</p>
+                <p style="opacity: 0.7; max-width: 600px;">Utilizing CAD and GIS to bridge technical analysis with creative spatial vision for human-centered environments.</p>
             </div>
         </section>
 
         <section id="contact">
             <span class="section-title">CONTACT.</span>
             <div class="contact-container">
-                <div class="contact-text">
-                    <h3 style="font-size: 3rem; font-weight: 800; line-height: 1.1;">Let's <br><span class="highlight">envision the</span> <br>future city together.</h3>
-                </div>
+                <h3>Let's envision the <br><span class="highlight">future city</span> together.</h3>
                 <form action="https://formspree.io/f/mqeydbkg" method="POST">
-                    <div class="form-group">
-                        <label for="name">NAME.</label>
-                        <input type="text" id="name" name="name" required placeholder="Your Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">EMAIL.</label>
-                        <input type="email" id="email" name="_replyto" required placeholder="contact@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">MESSAGE.</label>
-                        <textarea id="message" name="message" rows="4" required placeholder="How can we collaborate?"></textarea>
-                    </div>
+                    <input type="text" name="name" required placeholder="NAME.">
+                    <input type="email" name="_replyto" required placeholder="EMAIL.">
+                    <textarea name="message" rows="4" required placeholder="MESSAGE."></textarea>
                     <button type="submit" class="submit-btn">SEND MESSAGE.</button>
                 </form>
             </div>
-        </section>
-
-        <section id="comments">
-            <span class="section-title">COMMENTS.</span>
-            <div id="utterances-container"></div>
         </section>
     </main>
 

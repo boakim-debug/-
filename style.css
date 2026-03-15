@@ -2,10 +2,10 @@
     --bg-color: #f7fcfb;
     --text-color: #1a1a1a;
     --accent-mint: #4fd1c5;
-    --accent-mint-soft: rgba(79, 209, 197, 0.2);
+    --accent-mint-soft: rgba(79, 209, 197, 0.1);
     --accent-mint-dark: #319795;
     --border-color: #e2e8f0;
-    --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body.dark-mode {
@@ -16,40 +16,33 @@ body.dark-mode {
     --border-color: #30363d;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
-    transition: background-color 0.5s ease;
     overflow-x: hidden;
-    cursor: none; /* 기본 커서 숨김 */
+    cursor: none;
 }
 
-/* Custom Cursor: Transparent with Mint Border */
 #custom-cursor {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border: 2px solid var(--accent-mint);
-    background-color: transparent; /* 기본 투명 */
+    background-color: transparent;
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.2s ease, background-color 0.3s ease;
+    z-index: 10000;
+    transition: transform 0.15s ease, background-color 0.3s ease;
     transform: translate(-50%, -50%);
 }
 
-/* Hover State: Fills with Mint */
 #custom-cursor.hover {
     background-color: var(--accent-mint);
-    transform: translate(-50%, -50%) scale(1.2);
+    transform: translate(-50%, -50%) scale(1.5);
 }
 
 header {
@@ -60,7 +53,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: transparent;
     z-index: 1000;
 }
 
@@ -69,156 +61,118 @@ header {
     font-weight: 800;
     color: var(--accent-mint-dark);
     text-decoration: none;
-    letter-spacing: -1px;
 }
 
-nav {
-    display: flex;
-    gap: 2.5rem;
-    align-items: center;
-}
-
-nav a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-}
+nav { display: flex; gap: 2rem; align-items: center; }
+nav a { text-decoration: none; color: var(--text-color); font-size: 0.8rem; font-weight: 600; }
 
 #theme-toggle {
     background: var(--accent-mint);
     color: white;
     border: none;
-    padding: 0.5rem 1.2rem;
+    padding: 0.5rem 1rem;
     border-radius: 50px;
     font-size: 0.7rem;
     font-weight: 700;
-    cursor: none;
 }
 
-main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 10%;
-}
+main { max-width: 1200px; margin: 0 auto; padding: 0 10%; }
 
-section {
-    padding: 12rem 0;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: var(--transition);
-}
-
-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+section { padding: 8rem 0; opacity: 0; transform: translateY(30px); transition: var(--transition); }
+section.visible { opacity: 1; transform: translateY(0); }
 
 .section-title {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.2em;
     color: var(--accent-mint);
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     display: block;
 }
 
-/* Hero Section */
-.hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 0;
-}
+.hero { height: 80vh; display: flex; flex-direction: column; justify-content: center; }
+.hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1.1; font-weight: 800; }
+.hero p { font-size: 1.2rem; opacity: 0.6; margin-top: 1rem; }
+.highlight { color: var(--accent-mint); }
 
-.hero h1 {
-    font-size: clamp(3rem, 10vw, 6rem);
-    line-height: 1;
-    font-weight: 800;
-    margin-bottom: 2rem;
-    letter-spacing: -0.03em;
-}
-
-.hero p {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    max-width: 700px;
-    opacity: 0.7;
-    font-weight: 400;
-}
-
-.highlight {
-    color: var(--accent-mint);
-}
-
-/* Projects Grid */
+/* Works: Boxed Layout */
 .project-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
 }
 
-/* Form Styles */
-.contact-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
+project-card {
+    display: block;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    padding: 2.5rem;
+    border-radius: 20px;
+    transition: var(--transition);
 }
 
-.form-group { margin-bottom: 2rem; }
-.form-group label { 
-    display: block; 
-    margin-bottom: 0.8rem; 
-    font-weight: 700; 
-    font-size: 0.7rem; 
-    letter-spacing: 0.1em;
+project-card:hover {
+    border-color: var(--accent-mint);
+    transform: translateY(-10px);
+    background: var(--accent-mint-soft);
 }
 
+/* Modal for Details */
+#project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    z-index: 2000;
+    display: none;
+    overflow-y: auto;
+    padding: 5rem 10%;
+}
+
+.modal-close {
+    position: fixed;
+    top: 2rem;
+    right: 10%;
+    font-size: 0.8rem;
+    font-weight: 800;
+    cursor: none;
+    background: var(--accent-mint);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+}
+
+.modal-content h2 { font-size: 3rem; margin-bottom: 1rem; }
+.modal-content .description { font-size: 1.2rem; opacity: 0.7; margin-bottom: 3rem; }
+
+/* Contact Form */
+.contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
 input, textarea {
     width: 100%;
-    padding: 1.2rem 0;
+    padding: 1rem 0;
     border: none;
     border-bottom: 1px solid var(--border-color);
     background: transparent;
     color: var(--text-color);
     font-family: inherit;
-    font-size: 1.1rem;
-    transition: var(--transition);
-}
-
-input:focus, textarea:focus {
-    outline: none;
-    border-bottom-color: var(--accent-mint);
+    margin-bottom: 2rem;
 }
 
 .submit-btn {
     background: var(--text-color);
     color: var(--bg-color);
     border: none;
-    padding: 1.2rem 3rem;
+    padding: 1rem 3rem;
     font-weight: 700;
-    font-size: 0.9rem;
-    margin-top: 2rem;
     cursor: none;
-    transition: var(--transition);
 }
 
-.submit-btn:hover {
-    background: var(--accent-mint);
-}
-
-footer {
-    padding: 5rem 10%;
-    border-top: 1px solid var(--border-color);
-    text-align: left;
-    opacity: 0.5;
-    font-size: 0.8rem;
-}
+footer { padding: 4rem 10%; opacity: 0.4; font-size: 0.8rem; }
 
 @media (max-width: 768px) {
     body { cursor: auto; }
     #custom-cursor { display: none; }
     .contact-container { grid-template-columns: 1fr; }
-    section { padding: 8rem 0; }
 }
