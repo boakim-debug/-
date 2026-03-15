@@ -49,18 +49,26 @@ const loadUtterances = () => {
     const container = document.getElementById('utterances-container');
     if (!container) return;
 
+    // 안내 메시지 추가 (앱 미설치 시 사용자가 원인을 알 수 있도록)
+    container.innerHTML = '<p style="text-align:center; color:var(--text-color); opacity:0.6;">댓글 기능을 불러오는 중입니다... (설정이 완료되지 않은 경우 에러가 표시될 수 있습니다)</p>';
+
     const script = document.createElement('script');
     const isDarkMode = document.body.classList.contains('dark-mode');
     
     script.src = 'https://utteranc.es/client.js';
-    script.setAttribute('repo', 'boakim-debug/-'); // Replace with your repository
+    script.setAttribute('repo', 'boakim-debug/-'); 
     script.setAttribute('issue-term', 'pathname');
     script.setAttribute('label', '💬');
     script.setAttribute('theme', isDarkMode ? 'github-dark' : 'github-light');
     script.setAttribute('crossorigin', 'anonymous');
     script.async = true;
 
-    container.innerHTML = '';
+    // 스크립트 로드 완료 후 안내 메시지 삭제
+    script.onload = () => {
+        const placeholder = container.querySelector('p');
+        if (placeholder) placeholder.remove();
+    };
+
     container.appendChild(script);
 };
 
