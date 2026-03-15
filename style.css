@@ -28,21 +28,21 @@ body {
 }
 
 #custom-cursor {
-    width: 25px;
-    height: 25px;
-    border: 2px solid var(--accent-mint);
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--accent-mint);
     background-color: transparent;
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
     z-index: 10000;
-    transition: transform 0.15s ease, background-color 0.3s ease;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
     transform: translate(-50%, -50%);
 }
 
 #custom-cursor.hover {
-    background-color: var(--accent-mint);
-    transform: translate(-50%, -50%) scale(1.5);
+    background-color: rgba(79, 209, 197, 0.5); /* Semi-transparent mint */
+    transform: translate(-50%, -50%) scale(1.8);
 }
 
 header {
