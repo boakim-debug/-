@@ -15,12 +15,29 @@ class ProjectCard extends HTMLElement {
         const style = document.createElement('style');
         style.textContent = `
             .project-card {
-                border: 1px solid var(--border-color, #ccc);
-                padding: 1rem;
-                border-radius: 8px;
-                background-color: var(--section-bg, #fff);
-                color: var(--text-color, #333);
-                transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+                background-color: var(--section-bg, #ffffff);
+                border: 1px solid var(--border-color, #e2e8f0);
+                padding: 2.5rem;
+                border-radius: 20px;
+                transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+                cursor: pointer;
+                box-shadow: var(--card-shadow);
+            }
+            .project-card:hover {
+                transform: translateY(-10px);
+                border-color: var(--accent-mint, #4fd1c5);
+            }
+            h3 {
+                margin: 0 0 1rem 0;
+                font-size: 1.5rem;
+                color: var(--accent-mint-dark, #319795);
+            }
+            p {
+                margin: 0;
+                font-size: 1rem;
+                color: var(--text-color, #1a1a1a);
+                opacity: 0.8;
+                line-height: 1.6;
             }
         `;
 
@@ -37,56 +54,9 @@ customElements.define('project-card', ProjectCard);
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
-// Check for saved theme
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
-    body.classList.add('dark-mode');
-    themeToggle.textContent = '라이트 모드';
-}
-
-// Utterances Comments Logic
-const loadUtterances = () => {
-    const container = document.getElementById('utterances-container');
-    if (!container) return;
-
-    // 안내 메시지 추가 (앱 미설치 시 사용자가 원인을 알 수 있도록)
-    container.innerHTML = '<p style="text-align:center; color:var(--text-color); opacity:0.6;">댓글 기능을 불러오는 중입니다... (설정이 완료되지 않은 경우 에러가 표시될 수 있습니다)</p>';
-
-    const script = document.createElement('script');
-    const isDarkMode = document.body.classList.contains('dark-mode');
+const updateThemeUI = (isDark) => {
+    themeToggle.textContent = isDark ? 'LIGHT' : 'DARK';
     
-    script.src = 'https://utteranc.es/client.js';
-    script.setAttribute('repo', 'boakim-debug/-'); 
-    script.setAttribute('issue-term', 'pathname');
-    script.setAttribute('label', '💬');
-    script.setAttribute('theme', isDarkMode ? 'github-dark' : 'github-light');
-    script.setAttribute('crossorigin', 'anonymous');
-    script.async = true;
-
-    // 스크립트 로드 완료 후 안내 메시지 삭제
-    script.onload = () => {
-        const placeholder = container.querySelector('p');
-        if (placeholder) placeholder.remove();
-    };
-
-    container.appendChild(script);
-};
-
-// Initial load
-loadUtterances();
-
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    
-    const isDark = body.classList.contains('dark-mode');
-    if (isDark) {
-        localStorage.setItem('theme', 'dark');
-        themeToggle.textContent = '라이트 모드';
-    } else {
-        localStorage.setItem('theme', 'light');
-        themeToggle.textContent = '다크 모드';
-    }
-
     // Update Utterances theme
     const utterances = document.querySelector('.utterances-frame');
     if (utterances) {
@@ -97,4 +67,78 @@ themeToggle.addEventListener('click', () => {
         };
         utterances.contentWindow.postMessage(message, 'https://utteranc.es');
     }
+};
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    body.classList.add('dark-mode');
+    updateThemeUI(true);
+}
+
+themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    const isDark = body.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateThemeUI(isDark);
+});
+
+// Utterances Comments Logic
+const loadUtterances = () => {
+    const container = document.getElementById('utterances-container');
+    if (!container) return;
+
+    container.innerHTML = '<p style="text-align:center; opacity:0.5; padding: 2rem;">Loading comments...</p>';
+
+    const script = document.createElement('script');
+    const isDarkMode = body.classList.contains('dark-mode');
+    
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'boakim-debug/-'); 
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('label', '💬');
+    script.setAttribute('theme', isDarkMode ? 'github-dark' : 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+
+    script.onload = () => {
+        const placeholder = container.querySelector('p');
+        if (placeholder) placeholder.remove();
+    };
+
+    container.appendChild(script);
+};
+
+loadUtterances();
+
+// Scroll Animation
+const observerOptions = {
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('section').forEach(section => {
+    observer.observe(section);
+});
+
+// Smooth Scroll
+document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId.startsWith('#')) {
+            e.preventDefault();
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
+    });
 });
