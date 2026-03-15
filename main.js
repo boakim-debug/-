@@ -11,15 +11,16 @@ class ProjectCard extends HTMLElement {
         const style = document.createElement('style');
         style.textContent = `
             .project-card {
-                background: var(--item-bg, #f7fcfb);
-                border: 1px solid var(--border-color, #e2e8f0);
-                padding: 1.5rem;
-                border-radius: 12px;
-                margin-bottom: 1rem;
+                padding: 4rem 0;
+                border-bottom: 1px solid var(--border-color, #e2e8f0);
+                transition: transform 0.4s ease;
                 cursor: none;
             }
-            h3 { color: var(--accent-mint-dark, #319795); margin: 0 0 0.5rem 0; }
-            p { margin: 0; font-size: 0.95rem; opacity: 0.8; }
+            .project-card:hover {
+                transform: translateX(20px);
+            }
+            h3 { font-size: 2.5rem; margin: 0 0 1rem 0; font-weight: 800; letter-spacing: -1px; color: var(--text-color); }
+            p { font-size: 1.1rem; opacity: 0.6; max-width: 600px; }
         `;
         shadow.appendChild(style);
         shadow.appendChild(wrapper);
@@ -39,7 +40,7 @@ document.addEventListener('mousemove', (e) => {
 const addHover = () => cursor.classList.add('hover');
 const removeHover = () => cursor.classList.remove('hover');
 
-document.querySelectorAll('a, button, input, textarea, project-card').forEach(el => {
+document.querySelectorAll('a, button, input, textarea, project-card, .logo').forEach(el => {
     el.addEventListener('mouseenter', addHover);
     el.addEventListener('mouseleave', removeHover);
 });
@@ -59,12 +60,32 @@ themeToggle.addEventListener('click', () => {
     }
 });
 
-if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-mode');
-    themeToggle.textContent = 'LIGHT';
-}
+// Scroll Reveal Observer
+const observerOptions = { threshold: 0.1 };
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
 
-// Load Utterances
+document.querySelectorAll('section').forEach(section => {
+    observer.observe(section);
+});
+
+// Smooth Scroll
+document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId.startsWith('#')) {
+            e.preventDefault();
+            document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
+// Utterances
 const loadUtterances = () => {
     const container = document.getElementById('utterances-container');
     if (!container) return;
@@ -72,9 +93,13 @@ const loadUtterances = () => {
     script.src = 'https://utteranc.es/client.js';
     script.setAttribute('repo', 'boakim-debug/-');
     script.setAttribute('issue-term', 'pathname');
-    script.setAttribute('theme', document.body.classList.contains('dark-mode') ? 'github-dark' : 'github-light');
+    script.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light');
     script.setAttribute('crossorigin', 'anonymous');
     script.async = true;
     container.appendChild(script);
 };
 loadUtterances();
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeToggle.textContent = 'LIGHT';
+}
