@@ -1,21 +1,64 @@
 
+:root {
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+    --header-bg: #333;
+    --header-text: #fff;
+    --section-bg: #fff;
+    --item-bg: #f4f4f4;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --border-color: #333;
+}
+
+body.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #f4f4f4;
+    --header-bg: #000;
+    --header-text: #fff;
+    --section-bg: #2d2d2d;
+    --item-bg: #3d3d3d;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --border-color: #f4f4f4;
+}
+
 body {
     font-family: sans-serif;
     margin: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--header-bg);
+    color: var(--header-text);
     padding: 2rem;
     text-align: center;
+    position: relative;
 }
 
 header h1 {
     margin: 0;
     font-size: 2.5rem;
+}
+
+#theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 1px solid var(--header-text);
+    background: transparent;
+    color: var(--header-text);
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+#theme-toggle:hover {
+    background: var(--header-text);
+    color: var(--header-bg);
 }
 
 main {
@@ -25,15 +68,16 @@ main {
 }
 
 section {
-    background-color: #fff;
+    background-color: var(--section-bg);
     padding: 2rem;
     margin-bottom: 2rem;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px var(--shadow-color);
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 h2 {
-    border-bottom: 2px solid #333;
+    border-bottom: 2px solid var(--border-color);
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
 }
@@ -44,10 +88,11 @@ ul {
 }
 
 li {
-    background-color: #f4f4f4;
+    background-color: var(--item-bg);
     padding: 0.5rem;
     margin-bottom: 0.5rem;
     border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
 project-card {
