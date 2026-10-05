@@ -1,23 +1,43 @@
 class ProjectCard extends HTMLElement {
     constructor() {
         super();
-        const shadow = this.attachShadow({ mode: 'open' });
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = `
+        const name = this.getAttribute('name');
+        const description = this.getAttribute('description');
+        this.attachShadow({ mode: 'open' }).innerHTML = `
             <style>
-                h3 { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--text-color); }
-                p { font-size: 0.9rem; opacity: 0.6; }
+                h3 { 
+                    font-family: 'Inter', sans-serif; 
+                    font-weight: 700;
+                    font-size: 1.5rem; 
+                    margin-bottom: 0.5rem; 
+                    color: var(--text-color); 
+                }
+                p { 
+                    font-size: 1rem; 
+                    opacity: 0.6; 
+                    line-height: 1.5; 
+                }
             </style>
-            <h3>${this.getAttribute('name')}</h3>
-            <p>${this.getAttribute('description')}</p>
+            <h3>${name}</h3>
+            <p>${description}</p>
         `;
-        shadow.appendChild(wrapper);
     }
 }
-customElements.define('project-card', ProjectCard);
+if (!customElements.get('project-card')) {
+    customElements.define('project-card', ProjectCard);
+}
 
-// Custom Cursor
 const cursor = document.getElementById('custom-cursor');
+const modal = document.getElementById('project-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalDesc = document.getElementById('modal-description');
+const modalVisuals = document.getElementById('modal-visuals');
+const modalComments = document.getElementById('project-utterances');
+const closeModalBtn = document.querySelector('.modal-close');
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
+
+// Custom Cursor Logic
 document.addEventListener('mousemove', (e) => {
     cursor.style.left = e.clientX + 'px';
     cursor.style.top = e.clientY + 'px';
@@ -27,70 +47,76 @@ const addHover = () => cursor.classList.add('hover');
 const removeHover = () => cursor.classList.remove('hover');
 
 const updateInteractiveListeners = () => {
-    document.querySelectorAll('a, button, input, textarea, project-card, .logo').forEach(el => {
+    document.querySelectorAll('a, button, input, textarea, project-card, .logo, .modal-close').forEach(el => {
         el.removeEventListener('mouseenter', addHover);
         el.removeEventListener('mouseleave', removeHover);
         el.addEventListener('mouseenter', addHover);
         el.addEventListener('mouseleave', removeHover);
     });
 };
-updateInteractiveListeners();
 
 // Modal Logic
-const modal = document.getElementById('project-modal');
-const modalTitle = document.getElementById('modal-title');
-const modalDesc = document.getElementById('modal-description');
-const modalComments = document.getElementById('project-utterances');
-
 document.querySelectorAll('project-card').forEach(card => {
     card.addEventListener('click', () => {
-        const name = card.getAttribute('name');
-        const desc = card.getAttribute('description');
-        const id = card.id;
+        modalTitle.textContent = card.getAttribute('name');
+        modalDesc.textContent = card.getAttribute('description');
+        
+        modalVisuals.innerHTML = '';
+        const pdf = card.getAttribute('data-pdf');
+        if (pdf && pdf !=='#') {
+             modalVisuals.innerHTML += `<a href="${pdf}" target="_blank" class="pdf-link">View PDF Report</a>`;
+        }
 
-        modalTitle.textContent = name;
-        modalDesc.textContent = desc + " - This is where you can showcase more details about your urban design project, including images, maps, and research data.";
+        const png = card.getAttribute('data-png');
+        if (png) {
+            png.split(',').forEach(p => {
+                modalVisuals.innerHTML += `<img src="${p.trim()}" alt="${card.getAttribute('name')}" class="modal-img">`;
+            });
+        }
+
+        // 1. data-details 속성 읽어오기
+        const detailsText = card.getAttribute('data-details') || card.getAttribute('description') || '';
+
+        // 2. PROJECT DETAILS 영역 출력
+        const commentsTarget = document.getElementById('project-utterances') || modalComments;
+        if (commentsTarget) {
+            commentsTarget.innerHTML = `
+                <div class="project-details" style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb; text-align: left;">
+                    <h3 style="color: var(--highlight-color); font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.8rem; text-transform: uppercase;">PROJECT DETAILS</h3>
+                    <div style="line-height: 1.7; color: #333; font-size: 0.95rem;">${detailsText}</div>
+                </div>
+            `;
+        }
         modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-
-        // Load project-specific comments
-        modalComments.innerHTML = '';
-        const script = document.createElement('script');
-        script.src = 'https://utteranc.es/client.js';
-        script.setAttribute('repo', 'boakim-debug/-');
-        script.setAttribute('issue-term', `project-${id}`);
-        script.setAttribute('theme', document.body.classList.contains('dark-mode') ? 'github-dark' : 'github-light');
-        script.setAttribute('crossorigin', 'anonymous');
-        script.async = true;
-        modalComments.appendChild(script);
-        updateInteractiveListeners();
+        body.style.overflow = 'hidden';
     });
 });
 
-document.querySelector('.modal-close').addEventListener('click', () => {
+closeModalBtn.addEventListener('click', () => {
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    body.style.overflow = 'auto';
 });
 
-// Theme Toggle
-const themeToggle = document.getElementById('theme-toggle');
-themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    const isDark = document.body.classList.contains('dark-mode');
-    themeToggle.textContent = isDark ? 'LIGHT' : 'DARK';
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-});
-
-if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-mode');
+// Theme Toggle Logic
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme === 'dark') {
+    body.classList.add('dark-mode');
     themeToggle.textContent = 'LIGHT';
+} else {
+    themeToggle.textContent = 'DARK';
 }
 
-// Scroll Reveal
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-}, { threshold: 0.1 });
+themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    const isDark = body.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    themeToggle.textContent = isDark ? 'LIGHT' : 'DARK';
 
-document.querySelectorAll('section').forEach(section => observer.observe(section));
+    const commentFrame = document.querySelector('.utterances-frame');
+    if (commentFrame) {
+        commentFrame.contentWindow.postMessage({ type: 'set-theme', theme: isDark ? 'github-dark' : 'github-light' }, 'https://utteranc.es');
+    }
+});
+
+// Initial call
+updateInteractiveListeners();

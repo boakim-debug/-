@@ -3,30 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOA KIM | Urban Designer</title>
+    <title>Boa Kim | Urban Design Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+Pro:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="custom-cursor"></div>
 
-    <div id="project-modal">
-        <button class="modal-close">CLOSE.</button>
-        <div class="modal-content">
-            <h2 id="modal-title">Project Name</h2>
-            <p id="modal-description" class="description">Project detailed description goes here.</p>
-            <div id="modal-comments">
-                <span class="section-title">COMMENTS.</span>
-                <div id="project-utterances"></div>
-            </div>
-        </div>
-    </div>
-
     <header>
-        <a href="#" class="logo">URBAN.BOA</a>
+        <a href="#" class="logo">Boa Kim | Urban Design Portfolio</a>
         <nav>
-            <a href="#projects">WORKS.</a>
+            <a href="#works">WORKS.</a>
             <a href="#about">ABOUT.</a>
             <a href="#contact">CONTACT.</a>
             <button id="theme-toggle">DARK</button>
@@ -34,45 +23,131 @@
     </header>
 
     <main>
-        <section id="hero" class="hero visible">
-            <h1>Designing the <br>pulse of the city. <br>I am <span class="highlight">BOA KIM</span>.</h1>
-            <p>Urban engineering student focusing on human-centered spatial design.</p>
+        <section class="hero">
+            <h1>Designing the <br>pulse of the city. <br>I am <span class="highlight">BOA KIM.</span></h1>
+            <p>Urban engineering background with strong capabilities in spatial data analysis and multi-software design execution.</p>
         </section>
 
-        <section id="projects">
-            <span class="section-title">WORKS. (Click for details)</span>
+     <!-- EDUCATION & SKILLS SECTION -->
+<section id="resume-overview" class="resume-section">
+    <div class="resume-grid">
+      <!-- EDUCATION -->
+      <div class="resume-card">
+        <span class="section-title">EDUCATION</span>
+        <div class="education-list">
+          <div class="edu-item">
+            <div class="edu-header">
+              <h4>Yeungnam University</h4>
+              <span class="edu-date">2023.03 – 2027.02 (Expected)</span>
+            </div>
+            <p class="edu-sub">B.S. in Urban Engineering (GPA: 4.43 / 4.5)</p>
+            <p class="edu-desc">• Undergraduate Research Assistant at Intelligent Information City Lab</p>
+          </div>
+          <div class="edu-item">
+            <div class="edu-header">
+              <h4>[Exchange Student] University of Sheffield</h4>
+              <span class="edu-date">2025.09 – 2026.02</span>
+            </div>
+            <p class="edu-sub">School of Geography and Planning</p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- SKILLS & TOOLS -->
+      <div class="resume-card">
+        <span class="section-title">SKILLS & TOOLS</span>
+        <div class="skills-container">
+          <div class="skill-category">
+            <h5>Spatial Analysis & Planning</h5>
+            <div class="skill-tags">
+              <span class="tag">QGIS</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h5>Design & CAD</h5>
+            <div class="skill-tags">
+              <span class="tag">AutoCAD</span>
+              <span class="tag">SketchUp</span>
+              <span class="tag">Adobe Illustrator</span>
+              <span class="tag">Adobe Photoshop</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h5>Productivity</h5>
+            <div class="skill-tags">
+              <span class="tag">MS Office</span>
+              <span class="tag">HWP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+        <section id="works">
+            <span class="section-title">WORKS. (CLICK FOR DETAILS)</span>
             <div class="project-grid">
-                <project-card id="p1" name="Green Corridor" description="Landscape infrastructure project revitalizing neglected urban spaces."></project-card>
-                <project-card id="p2" name="Smart Mobility Hub" description="Integrated transit center connecting personal mobility and public transport."></project-card>
-                <project-card id="p3" name="Pedestrian First" description="Urban regeneration transforming vehicle-oriented streets to pedestrian zones."></project-card>
+                <project-card 
+                    id="p1"
+                    name="慕:溫 (Mo:On) Campus Project" 
+                    description="Open Campus Regeneration of the Yeungnam University College District"
+                    data-pdf="orangetown/Portfolio Panel_YeongnamUni_CampusTown_Design_BoaKim.pdf"
+                    data-png="orangetown/Portfolio Panel_YeongnamUni_CampusTown_Design_BoaKim-1.png"
+                    data-details="慕:溫 (Mo:On) Campus Project<br>Open Campus Regeneration of the Yeungnam University College District<br>Site : Orange Town, Gyeongsan, South Korea (170,000㎡)<br>Course : Site Planning Studio, Dept. of Urban Engineering, Yeungnam University<br>Period : May~June 2025<br>Mo:On means the space where people gather and share warmth. The project proposes an open campus where young people can meet, create, and take on new challenges, responding to the decline and inactivity of the college district.<br>The site analysis combined historical aerial photographs, population projections, field surveys, a SWOT analysis, and GIS-based maps of zoning, building age, and building height. Key issues identified were a lack of content, narrow sidewalks with poor pedestrian vehicle separation, parking shortages, and limited green space.<br>The master plan is organized around a Green Road pedestrian axis linking four zones: green spaces (Botanic Garden, Global Lounge), arts and culture (plaza, open gallery, arts education center), startups (shared office, startup support center, creative lab), and sharing facilities (shared office, shared library, shared kitchen).<br>Tools : AutoCAD, QGIS, SketchUp, Adobe Illustrator, Adobe Photoshop<br>Outcome : A+ in the course; panel exhibited in the department">
+                </project-card>
+                <project-card 
+                    id="p2"
+                    name="Sheffield CIQ Site Design"
+                    description="Urban Regeneration Design in Sheffield's CIQ(Cultural Industries Quarter),UK"
+                    data-pdf="site-design/SITE_DESIGN_UK_Sheffield_CIQ_BoaKim.pdf"
+                    data-png="site-design/SITE_DESIGN_UK_Sheffield_CIQ_BoaKim-1.png,site-design/SITE_DESIGN_UK_Sheffield_CIQ_BoaKim-2.png"
+                    data-details="Urban Regeneration Design in Sheffield's CIQ(Cultural Industries Quarter)<br>Site Cultural Industries Quarter (CIQ), Sheffield, UK (10,586.8㎡ / 2.6 acres)<br>Course : Urban Design and Place-Making, School of Geography and Planning, University of Sheffield<br>Period : September 2025~January 2026, Individual project<br>The site, a largely underused surface car park in the CIQ, was redesigned as a cultural hub that celebrates Sheffield's industrial heritage while creating a pedestrian-friendly, sustainable community.<br>The site analysis covered the strategic context, planning policy, route hierarchy, legibility, land use, active frontages, and historical change from the 1900s to the present. It identified opportunities along the Porter Brook waterfront and the area's heritage buildings, alongside constraints such as the conservation area, inactive frontages, and limited open space.<br>Two design options were compared: a pedestrian-focused retail street and an open-space landmark with mixed-use offices. The final design combines the hotel and park from the first option with the mixed-use office, residential, and parking elements from the second. The park includes a flood-resistant boardwalk, a terraced deck for busking, and flexible space for pop-up markets. Corten steel and red brick were chosen to reflect Sheffield's industrial history.<br>Tools : AutoCAD, SketchUp, Adobe Illustrator, Adobe Photoshop<br>Outcome : 83/100 (First Class, the highest UK grade band of 70+)">
+                </project-card>
             </div>
         </section>
 
         <section id="about">
             <span class="section-title">ABOUT.</span>
             <div class="about-content">
-                <p style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">Simplicity is the ultimate sophistication in urban challenges.</p>
-                <p style="opacity: 0.7; max-width: 600px;">Utilizing CAD and GIS to bridge technical analysis with creative spatial vision for human-centered environments.</p>
+                <h2>I care about cities where people want to stay...<br>safe, walkable, and alive. Getting there takes more than I know today, so I keep throwing myself into <br>what I don't know yet. Learn it, try it, make it better.<br>Then do it again.</h2>
             </div>
         </section>
 
         <section id="contact">
             <span class="section-title">CONTACT.</span>
             <div class="contact-container">
-                <h3>Let's envision the <br><span class="highlight">future city</span> together.</h3>
-                <form action="https://formspree.io/f/mqeydbkg" method="POST">
-                    <input type="text" name="name" required placeholder="NAME.">
-                    <input type="email" name="_replyto" required placeholder="EMAIL.">
-                    <textarea name="message" rows="4" required placeholder="MESSAGE."></textarea>
+                <div class="contact-text">
+                    <h2>Let's envision the <br><span class="highlight">future city</span> together.</h2>
+                </div>
+                <form action="https->//formspree.io/f/your_form_id" method="POST">
+                    <label for="name">NAME.</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">EMAIL.</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="message">MESSAGE.</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
                     <button type="submit" class="submit-btn">SEND MESSAGE.</button>
                 </form>
             </div>
         </section>
     </main>
-
+    
     <footer>
-        <p>&copy; 2026 BOA KIM | URBAN DESIGN PORTFOLIO.</p>
+        <p>&copy; 2026 Boa Kim | Urban Design Portfolio</p>
     </footer>
+
+    <div id="project-modal">
+        <div class="modal-content-wrapper">
+            <button class="modal-close">CLOSE.</button>
+            <div class="modal-content">
+                <h2 id="modal-title">Project Name</h2>
+                <p id="modal-description">Project detailed description goes here.</p>
+                <div id="modal-visuals"></div>
+                <div id="modal-comments">
+                    <div id="project-utterances"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="main.js"></script>
 </body>
